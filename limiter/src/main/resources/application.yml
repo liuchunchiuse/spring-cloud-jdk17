@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080 # Sentinel Dashboard ???
+        port: 8719               # ????? Dashboard ?????
+    nacos:
+      discovery:
+        server-addr: 192.168.52.1:8848
+        username: nacos
+        password: nacos
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        username: nacos
+        password: nacos
+  config:
+    import:
+      - optional:nacos:${spring.application.name}-@profiles.active@.yml
+  profiles:
+    active: @profiles.active@
